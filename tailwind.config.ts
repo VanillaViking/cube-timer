@@ -12,7 +12,6 @@ const config: Config = {
         'timer-green': "#42f548",
         'timer-red': "#f54242",
         'timer-default': "#ffffff",
-
       }
     },
   },
