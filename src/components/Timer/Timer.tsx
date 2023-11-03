@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 // how long the player needs to hold the spacebar down before the timer is startable 
 const TIMER_START_DELAY = 300
 
-const Timer = () => {
+const Timer = ({setLatestSolve}: {setLatestSolve: (arg1: number) => void}) => {
     const [time, setTime] = useState<number>(0.0);
     const [textColour, setTextColour] = useState<String>("#ffffff")
     
@@ -85,14 +85,16 @@ const Timer = () => {
         let timerStop = Date.now()
         clearInterval(timerUpdater)
         //@ts-ignore
-        setTime((timerStop - timerStart) / 1000)
+        const solveTime = (timerStop - timerStart) / 1000
+        setTime(solveTime)
+        setLatestSolve(solveTime)
         timerStart = null
         
     }
 
 
     return (
-        <h1 className={`${textColour} text-[200px] absolute top-[50%] -translate-y-[50%]`}>{time.toFixed(1)}</h1>
+        <h1 className={`${textColour} text-[150px] md:text-[200px] absolute top-[50%] -translate-y-[50%]`}>{time.toFixed(1)}</h1>
 
     )
 }
