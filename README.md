@@ -1,7 +1,7 @@
 This is a cube timer app, with generated scrambles and other statistics.
 
 
-##[Check it out!](https://cube-timer-theta.vercel.app/)
+### [Check it out!](https://cube-timer-theta.vercel.app/)
 
 ## Getting Started
 
