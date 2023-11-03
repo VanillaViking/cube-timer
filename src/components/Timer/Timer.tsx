@@ -14,24 +14,25 @@ const Timer = () => {
 
     useEffect(() => {
         document.addEventListener('keydown', handleKeyDown)
+        document.addEventListener('touchstart', handleTouchStart)
+        document.addEventListener('touchend', handleTouchEnd)
         document.addEventListener('keyup', handleKeyUp)
 
         return () => {
             document.removeEventListener('keydown', handleKeyDown)
             document.removeEventListener('keyup', handleKeyUp)
+            document.removeEventListener('touchstart', handleTouchStart)
+            document.removeEventListener('touchend', handleTouchEnd)
         }
     }, [])
 
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key !== ' ') return;
-        if (event.repeat) return;
-
+    const handleDown = () => {
         if (timerStart != null) {
             stopTimer()
             return
         }
-        
+
         setTime(0)
         keydownTime = Date.now()
         setTextColour("text-timer-red")
@@ -40,12 +41,8 @@ const Timer = () => {
         }, TIMER_START_DELAY)
     }
 
-    const handleKeyUp = (event: KeyboardEvent) => {
-        if (timerStart != null) {
-            return
-        }
-
-        if (event.key === ' ' && keydownTime) {
+    const handleUp = () => {
+        if (keydownTime) {
             setTextColour("text-timer-default")
             clearTimeout(timeoutId)
             if (Date.now() - keydownTime >= TIMER_START_DELAY) {
@@ -53,7 +50,26 @@ const Timer = () => {
                 keydownTime = null
             }
         }
-        
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key !== ' ') return;
+        if (event.repeat) return;
+        handleDown()
+    }
+
+    const handleTouchStart = (event: TouchEvent) => {
+        handleDown()    
+    }
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+        if (timerStart != null) return
+        if (event.key !== ' ') return
+        handleUp()
+    }
+
+    const handleTouchEnd = (event: TouchEvent) => {
+        handleUp()
     }
 
     const startTimer = () => {
