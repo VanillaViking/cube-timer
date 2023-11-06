@@ -5,7 +5,7 @@ const Face = ({stickers}: {stickers: Colours[]}) => {
     const colorVariants = [ 
         "bg-[#ffffff]",
         "bg-[#ffa500]",
-        "bg-[#008000]",
+        "bg-[#00DD00]",
         "bg-[#FF0000]",
         "bg-[#0000FF]",
         "bg-[#FFFF00]",

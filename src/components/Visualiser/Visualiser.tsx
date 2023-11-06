@@ -7,15 +7,15 @@ const Visualiser = ({scramble}: {scramble: string}) => {
     return (
       <div className='grid grid-cols-4 gap-4'>
         <div className='w-48 h-48'/>
-        <Face stickers={cube.white} />
+        <Face stickers={cube.UFace} />
         <div className='w-48 h-48'/>
         <div className='w-48 h-48'/>
-        <Face stickers={cube.orange}/>
-        <Face stickers={cube.green}/>
-        <Face stickers={cube.red}/>
-        <Face stickers={cube.blue}/>
+        <Face stickers={cube.LFace}/>
+        <Face stickers={cube.FFace}/>
+        <Face stickers={cube.RFace}/>
+        <Face stickers={cube.BFace}/>
         <div className='w-48 h-48'/>
-        <Face stickers={cube.yellow}/>
+        <Face stickers={cube.DFace}/>
         <div className='w-48 h-48'/>
         <div className='w-48 h-48'/>
       </div>
