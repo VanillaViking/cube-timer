@@ -57,7 +57,7 @@ const layerConnections = {
         top: {face: "UFace", connectedStickers: [2, 1, 0]},
         left: {face: "RFace", connectedStickers: [8, 5, 2]},
         bottom: {face: "DFace", connectedStickers: [6, 7, 8]},
-        right: {face: "BFace", connectedStickers: [6, 3, 0]},
+        right: {face: "LFace", connectedStickers: [6, 3, 0]},
     },
     DFace: {
         top: {face: "FFace", connectedStickers: [6, 7, 8]},
