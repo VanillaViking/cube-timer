@@ -27,12 +27,12 @@ const Visualiser = ({scramble}: {scramble: string}) => {
         <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("L")}>L</button>
         <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("D")}>D</button>
         <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("B")}>B</button>
-        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("F'")}>F'</button>
-        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("R'")}>R'</button>
-        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("U'")}>U'</button>
-        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("L'")}>L'</button>
-        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("D'")}>D'</button>
-        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("B'")}>B'</button>
+        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("F'")}>{`F'`}</button>
+        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("R'")}>{`R'`}</button>
+        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("U'")}>{`U'`}</button>
+        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("L'")}>{`L'`}</button>
+        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("D'")}>{`D'`}</button>
+        <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("B'")}>{`B'`}</button>
       </div>
     </>
     )
