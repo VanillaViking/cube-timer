@@ -12,7 +12,7 @@ const Face = ({stickers}: {stickers: Colours[]}) => {
     ]
 
     return (
-        <div className='w-48 h-48 grid grid-cols-3 border border-black'>
+        <div className='w-20 h-20 grid grid-cols-3 border border-black'>
             <div className={`border border-black ${colorVariants[stickers[0]]}`}></div>
             <div className={`border border-black ${colorVariants[stickers[1]]}`}></div>
             <div className={`border border-black ${colorVariants[stickers[2]]}`}></div>

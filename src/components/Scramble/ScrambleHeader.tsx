@@ -10,7 +10,7 @@ const OPPOSITES = {
     B: "F",
 }
 
-const generateScramble = () => {
+export const generateScramble = () => {
         let prevMove = ""
         let prevPrevMove = ""
         return Array(20).fill("").map((move, idx, scrambleArr) => {

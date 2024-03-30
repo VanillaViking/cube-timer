@@ -55,9 +55,9 @@ const layerConnections = {
     },
     BFace: {
         top: {face: "UFace", connectedStickers: [2, 1, 0]},
-        left: {face: "RFace", connectedStickers: [8, 5, 2]},
+        right: {face: "LFace", connectedStickers: [0, 3, 6]},
         bottom: {face: "DFace", connectedStickers: [6, 7, 8]},
-        right: {face: "LFace", connectedStickers: [6, 3, 0]},
+        left: {face: "RFace", connectedStickers: [8, 5, 2]},
     },
     DFace: {
         top: {face: "FFace", connectedStickers: [6, 7, 8]},
@@ -70,20 +70,37 @@ const layerConnections = {
 export function useRubiksCube(initialCube?: RubiksCube) {
     const [rubiksCube, setRubiksCube] = useState<RubiksCube>(initialCube || solvedCube);
 
-    const turn = (move: string) => {
+    const turn = (move: string, cube?: RubiksCube): RubiksCube => {
+	let currentCube = cube || structuredClone(rubiksCube)
         const face = `${move[0]}Face`
         const anticlockwise = move.includes("'")
         const double = move.includes("2")
 
-        const rotatedFace = rotateFace(face, anticlockwise, double)
-        rotateAdjacent(face, anticlockwise, double, rotatedFace)
+        const rotatedFace = rotateFace(currentCube, face, anticlockwise, double)
+        const updatedCube = rotateAdjacent(currentCube, face, anticlockwise, double, rotatedFace)
+
+	if (!cube) {
+	  setRubiksCube(updatedCube)
+	}
+
+	return updatedCube
 
     }
 
-    const rotateFace = (face: string, anticlockwise: boolean, double: boolean) => {
+    const performScramble = (scramble: string) => {
+      if (!scramble) return
+      let moves = scramble.split(" ")
+      let cube = structuredClone(rubiksCube)
+      moves.forEach((move) => {
+	  cube = turn(move, cube);
+      });
+      setRubiksCube(cube)
+    }
+
+    const rotateFace = (cube: RubiksCube, face: string, anticlockwise: boolean, double: boolean) => {
         // cbbs
         //@ts-ignore
-        const currentFace = structuredClone(rubiksCube[face])
+        const currentFace = structuredClone(cube[face])
         let newFace: Colours[];
         if (anticlockwise)  {
             newFace = [currentFace[2], currentFace[5], currentFace[8], currentFace[1], currentFace[4], currentFace[7], currentFace[0], currentFace[3], currentFace[6]]
@@ -98,10 +115,10 @@ export function useRubiksCube(initialCube?: RubiksCube) {
         
     }
 
-    const rotateAdjacent = (face: string, anticlockwise: boolean, double: boolean, rotatedFace: Colours[]) => {
+    const rotateAdjacent = (cube: RubiksCube, face: string, anticlockwise: boolean, double: boolean, rotatedFace: Colours[]): RubiksCube => {
         //@ts-ignore
         const adjacentConnections = layerConnections[face]
-        let editedFaces = structuredClone(rubiksCube)
+        let editedFaces = cube
         //@ts-ignore
         editedFaces[face] = rotatedFace
 
@@ -143,12 +160,14 @@ export function useRubiksCube(initialCube?: RubiksCube) {
             }
 
         }
-
-        setRubiksCube(editedFaces)
+	
+	return editedFaces
+        //setRubiksCube(editedFaces)
     }
 
     return {
         rubiksCube,
         turn,
+	performScramble,
     }
 }
