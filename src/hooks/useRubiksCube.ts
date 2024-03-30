@@ -70,6 +70,10 @@ const layerConnections = {
 export function useRubiksCube(initialCube?: RubiksCube) {
     const [rubiksCube, setRubiksCube] = useState<RubiksCube>(initialCube || solvedCube);
 
+    const resetCube = () => {
+      setRubiksCube(solvedCube)
+    }
+
     const turn = (move: string, cube?: RubiksCube): RubiksCube => {
 	let currentCube = cube || structuredClone(rubiksCube)
         const face = `${move[0]}Face`
@@ -90,7 +94,7 @@ export function useRubiksCube(initialCube?: RubiksCube) {
     const performScramble = (scramble: string) => {
       if (!scramble) return
       let moves = scramble.split(" ")
-      let cube = structuredClone(rubiksCube)
+      let cube = structuredClone(solvedCube)
       moves.forEach((move) => {
 	  cube = turn(move, cube);
       });
@@ -118,7 +122,7 @@ export function useRubiksCube(initialCube?: RubiksCube) {
     const rotateAdjacent = (cube: RubiksCube, face: string, anticlockwise: boolean, double: boolean, rotatedFace: Colours[]): RubiksCube => {
         //@ts-ignore
         const adjacentConnections = layerConnections[face]
-        let editedFaces = cube
+        let editedFaces = structuredClone(cube)
         //@ts-ignore
         editedFaces[face] = rotatedFace
 
@@ -127,36 +131,36 @@ export function useRubiksCube(initialCube?: RubiksCube) {
             for (let i = 0; i < 3; i++) {
                 // quality code
                 //@ts-ignore
-                editedFaces[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]] = rubiksCube[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]]
+                editedFaces[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]] = cube[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]]
                 //@ts-ignore
-                editedFaces[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]] = rubiksCube[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]]
+                editedFaces[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]] = cube[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]]
                 //@ts-ignore
-                editedFaces[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]] = rubiksCube[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]]
+                editedFaces[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]] = cube[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]]
                 //@ts-ignore
-                editedFaces[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]] = rubiksCube[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]]
+                editedFaces[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]] = cube[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]]
             }
         } else if (double) {
             for (let i = 0; i < 3; i++) {
                 //@ts-ignore
-                editedFaces[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]] = rubiksCube[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]]
+                editedFaces[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]] = cube[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]]
                 //@ts-ignore
-                editedFaces[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]] = rubiksCube[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]]
+                editedFaces[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]] = cube[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]]
                 //@ts-ignore
-                editedFaces[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]] = rubiksCube[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]]
+                editedFaces[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]] = cube[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]]
                 //@ts-ignore
-                editedFaces[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]] = rubiksCube[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]]
+                editedFaces[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]] = cube[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]]
             }
         } else {
 
             for (let i = 0; i < 3; i++) {
                 //@ts-ignore
-                editedFaces[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]] = rubiksCube[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]]
+                editedFaces[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]] = cube[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]]
                 //@ts-ignore
-                editedFaces[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]] = rubiksCube[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]]
+                editedFaces[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]] = cube[adjacentConnections.right.face][adjacentConnections.right.connectedStickers[i]]
                 //@ts-ignore
-                editedFaces[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]] = rubiksCube[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]]
+                editedFaces[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]] = cube[adjacentConnections.bottom.face][adjacentConnections.bottom.connectedStickers[i]]
                 //@ts-ignore
-                editedFaces[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]] = rubiksCube[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]]
+                editedFaces[adjacentConnections.top.face][adjacentConnections.top.connectedStickers[i]] = cube[adjacentConnections.left.face][adjacentConnections.left.connectedStickers[i]]
             }
 
         }
@@ -169,5 +173,6 @@ export function useRubiksCube(initialCube?: RubiksCube) {
         rubiksCube,
         turn,
 	performScramble,
+	resetCube,
     }
 }

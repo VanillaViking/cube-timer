@@ -2,12 +2,12 @@ import {useRubiksCube} from "@/hooks/useRubiksCube"
 import Face from "./Face"
 import { useEffect } from "react";
 
-const Visualiser = ({scramble}: {scramble: string}) => {
-    const {rubiksCube: cube, performScramble, turn} = useRubiksCube(); 
+const Visualiser = ({scramble, controls=false}: {scramble: string, controls?: boolean}) => {
+    const {rubiksCube: cube, performScramble, turn, resetCube} = useRubiksCube(); 
 
     useEffect(() => {
       performScramble(scramble);
-    }, [])
+    }, [scramble])
 
     return (
     <>
@@ -25,7 +25,9 @@ const Visualiser = ({scramble}: {scramble: string}) => {
         <div className='w-20 h-20'/>
         <div className='w-20 h-20'/>
       </div>
-      { <div className="grid grid-cols-6 gap-2 mt-8">
+      {controls && ( 
+      <>
+      <div className="grid grid-cols-6 gap-2 mt-8">
         <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("F")}>F</button>
         <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("R")}>R</button>
         <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("U")}>U</button>
@@ -38,7 +40,10 @@ const Visualiser = ({scramble}: {scramble: string}) => {
         <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("L'")}>{`L'`}</button>
         <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("D'")}>{`D'`}</button>
         <button className='border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => turn("B'")}>{`B'`}</button>
-      </div> }
+      </div> 
+        <button className='mt-8 border w-[100px] h-[40px] border-slate-500 rounded-lg bg-slate-300' onClick={() => resetCube()}>Reset</button>
+	</>
+      )}
     </>
     )
 }
