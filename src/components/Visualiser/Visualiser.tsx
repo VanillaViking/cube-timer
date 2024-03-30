@@ -12,18 +12,18 @@ const Visualiser = ({scramble, controls=false}: {scramble: string, controls?: bo
     return (
     <>
       <div className='grid grid-cols-4 gap-2'>
-        <div className='w-20 h-20'/>
+        <div className='sm:w-20 sm:h-20 w-16 h-16'/>
         <Face stickers={cube.UFace} />
-        <div className='w-20 h-20'/>
-        <div className='w-20 h-20'/>
+        <div className='sm:w-20 sm:h-20 w-16 h-16'/>
+        <div className='sm:w-20 sm:h-20 w-16 h-16'/>
         <Face stickers={cube.LFace}/>
         <Face stickers={cube.FFace}/>
         <Face stickers={cube.RFace}/>
         <Face stickers={cube.BFace}/>
-        <div className='w-20 h-20'/>
+        <div className='sm:w-20 sm:h-20 w-16 h-16'/>
         <Face stickers={cube.DFace}/>
-        <div className='w-20 h-20'/>
-        <div className='w-20 h-20'/>
+        <div className='sm:w-20 sm:h-20 w-16 h-16'/>
+        <div className='sm:w-20 sm:h-20 w-16 h-16'/>
       </div>
       {controls && ( 
       <>
