@@ -17,7 +17,7 @@ export default function Home() {
       className={`flex min-h-screen flex-col items-center p-12 bg-white text-black ${inter.className}`}
     >
 
-    <VirtualCube />
+    <Visualiser scramble="" controls={ true }/>
       
     </main>
 

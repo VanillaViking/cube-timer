@@ -10,7 +10,7 @@ const OPPOSITES = {
     B: "F",
 }
 
-const generateScramble = () => {
+export const generateScramble = () => {
         let prevMove = ""
         let prevPrevMove = ""
         return Array(20).fill("").map((move, idx, scrambleArr) => {
@@ -26,13 +26,7 @@ const generateScramble = () => {
 }
 
 
-const ScrambleHeader = ({ latestSolve }: { latestSolve: number | undefined }) => {
-    const [scramble, setScramble] = useState<String>(generateScramble());
-
-    useEffect(() => {
-        setScramble(generateScramble()) 
-    }, [latestSolve])
-
+const ScrambleHeader = ({ latestSolve, scramble }: { latestSolve: number | undefined, scramble: string }) => {
 
     return (
         <h1 className="mt-5 md:text-3xl text-md text-center">{scramble}</h1>
